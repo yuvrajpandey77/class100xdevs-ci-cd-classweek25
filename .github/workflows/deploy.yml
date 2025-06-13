@@ -13,12 +13,7 @@ jobs:
     steps:
       - name: Checkout the code
         uses: actions/checkout@v4
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '18'
-          cache: 'npm'
+    
 
       - name: executing remote ssh commands using password
         uses: appleboy/ssh-action@v0.1.7

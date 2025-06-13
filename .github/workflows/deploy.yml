@@ -12,20 +12,30 @@ jobs:
 
     steps:
       - name: Checkout the code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
 
       - name: executing remote ssh commands using password
-        uses: appleboy/ssh-action@v1
+        uses: appleboy/ssh-action@v0.1.7
         with:
           host: 3.7.71.233
           username: ubuntu
           key: ${{ secrets.PRIVATE_SSH_KEY }}
           port: 22
-          script:  |
+          script: |
             cd class100xdevs-ci-cd-classweek25
             ls
             git pull origin main
             npm install
             npm run build
-            npm run start
+            # Stop any existing process
+            pm2 stop all || true
+            # Start the application
+            pm2 start npm --name "class100xdevs" -- start
+            # Save PM2 process list
+            pm2 save

@@ -24,6 +24,7 @@ jobs:
           port: 22
           script:  |
             cd class100xdevs-ci-cd-classweek25
+            ls
             git pull origin main
             npm install
             npm run build

@@ -32,5 +32,7 @@ jobs:
             cd class100xdevs-ci-cd-classweek25
             git reset --hard
             git clean -fd
+            # Make deploy script executable
+            chmod +x deploy.sh
             # Run deployment
             ./deploy.sh

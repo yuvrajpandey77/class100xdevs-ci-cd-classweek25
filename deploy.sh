@@ -11,4 +11,17 @@ git clean -fd
 git pull origin main
 npm install
 NEXT_TELEMETRY_DISABLED=1 npm run build --no-lint
-npm run start
+# Kill any existing node process
+pkill -f "node" || true
+# Start the application in the background
+nohup npm run start > app.log 2>&1 &
+# Wait a few seconds to ensure the app starts
+sleep 5
+# Check if the app is running
+if pgrep -f "node" > /dev/null; then
+  echo "Application started successfully"
+  exit 0
+else
+  echo "Application failed to start"
+  exit 1
+fi

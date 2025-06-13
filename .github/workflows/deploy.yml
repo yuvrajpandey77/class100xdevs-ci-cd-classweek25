@@ -27,15 +27,6 @@ jobs:
               curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
               sudo apt-get install -y nodejs
             fi
-            # Go to home directory
             cd ~
-            # Clone or update repository
-            if [ ! -d "class100xdevs-ci-cd-classweek25" ]; then
-              git clone https://github.com/yuvrajpandey77/class100xdevs-ci-cd-classweek25.git
-            fi
-            cd class100xdevs-ci-cd-classweek25
-            git pull origin main
-            # Make deploy script executable
             chmod +x deploy.sh
-            # Run deployment
             ./deploy.sh

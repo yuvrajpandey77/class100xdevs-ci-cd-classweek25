@@ -27,15 +27,4 @@ jobs:
           username: ubuntu
           key: ${{ secrets.PRIVATE_SSH_KEY }}
           port: 22
-          script: |
-            cd class100xdevs-ci-cd-classweek25
-            ls
-            git pull origin main
-            npm install
-            npm run build
-            # Stop any existing process
-            pm2 stop all || true
-            # Start the application
-            pm2 start npm --name "class100xdevs" -- start
-            # Save PM2 process list
-            pm2 save
+          script: ./deploy.sh
